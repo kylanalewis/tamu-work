@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local COVID-19 Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- TAB CONTENT STYLE SHEETS -->
+  <link href="style.css" rel="stylesheet">
+  <link href="National_API\searchbar\search.css" rel="stylesheet">
+  <script src="National_API\searchbar\searchCases.js"></script>
+  <link href="homeScript.css" rel="stylesheet">
+</head>
+
+<body onload="getLocation()"> 
+  <div id="top" class="header">
+    <h1>Local COVID-19 Dashboard</h1>
+  </div>
+ 
+  <!-- Tab link functionality -->
+  <button class="tablink" onclick="openPage('Home', this, '#23445D', 'white')">Home</button>
+  <button class="tablink" onclick="openPage('GeneralInfo', this, '#23445D', 'white')" id="defaultOpen">General Info.</button>
+  <button class="tablink" onclick="openPage('Statistics', this, '#23445D', 'white')" id="defaultOpen">Statistics</button>
+  <button class="tablink" onclick="openPage('MedicalFacilities', this, '#23445D', 'white')">Medical Facilities</button>
+  <button class="tablink" onclick="openPage('Foodbanks', this, '#23445D', 'white')">Foodbanks</button>
+  <button class="tablink" onclick="openPage('NewsMedia', this, '#23445D', 'white')">News and Media</button>
+
+  <!-- Tab content, CALLS SCRIPTS -->
+  <div id="Home" class="tabcontent">
+    <h3>Home</h3>
+    <p>Summary dashboard</p>
+    <div id="homeScript">
+      <script src="homeScript.js"></script>
+    </div>
+  </div>
+
+  <div id="GeneralInfo" class="tabcontent">
+    <h3>General Information</h3>
+    <p>History, symptoms, etc.</p> 
+  </div>
+
+  <div id="Statistics" class="tabcontent">
+    <h3>Statistics</h3>
+    <p>Texas county statistics.</p>
+
+    <p id="coordinate"></p>
+    <p id="json"></p>
+
+    <form id="form" autocomplete="off" onsubmit="returnGuess(); return false" action="">
+
+      <div class="autocomplete" style="width:300px;">
+        <input id="myInput" type="text" name="county" placeholder="County Name">
+      </div>
+      <input type="submit">
+
+    </form>
+
+    <div id="CountyCases">
+      <p>Results</p>
+      <script src="National_API\searchbar\searchCases.js"></script>
+    </div>
+
+  </div>
+
+  <div id="MedicalFacilities" class="tabcontent">
+    <h3>Medical Facilities</h3>
+    <p>Nearby facilities.</p>
+  </div>
+
+  <div id="Foodbanks" class="tabcontent">
+    <h3>Foodbanks</h3>
+    <p>Food shelters and food banks for those in need.</p>
+  </div>
+
+  <div id="NewsMedia" class="tabcontent">
+    <h3>News and Social Media</h3>
+    <p>Google news and Twitter</p>
+    <div align = "right">
+      <a class="twitter-timeline" data-width="300" data-height="700" href="https://twitter.com/oohkylan/lists/coronavirus?ref_src=twsrc%5Etfw">Twitter List</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <a href="https://twitter.com/intent/tweet?button_hashtag=corona&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #corona</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </div>
+  </div>
+
+  <!-- Tab content default style -->
+  <script>
+    function openPage(pageName,elmnt,color, text) {
+      var i, tabcontent, tablinks;
+
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+
+      document.getElementById(pageName).style.display = "block";
+      elmnt.style.backgroundColor = color;
+      for (i=0; i < tablinks.length; i++){
+        tablinks[i].style.color = '#A5A5A5'; 
+      }
+      elmnt.style.color = text; 
+    }
+    
+  
+  </script>
+
+</body>
+
+</html>
+
+<script src="National_API\getUserLocation\get_location.js"></script>
+    <script src="National_API\getUserLocation\bigdatacloud_reverse_geocode.js"></script>

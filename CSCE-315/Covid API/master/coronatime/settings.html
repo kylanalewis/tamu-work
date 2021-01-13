@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local COVID-19 Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="settings.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <script type="module" src="/path/to/js.cookie.mjs"></script>
+  <script type="module">
+    import Cookies from '/path/to/js.cookie.mjs'
+    $('.js--accessibility__font__size li').click(function( ev ) {
+      var selectedClass = 'current';
+
+      // Remove current class from the list
+      if( $(this).parent().find('li a').hasClass( selectedClass ) ) {
+          $(this).parent().find('li a').removeClass( selectedClass );
+      }
+
+      // Add current class to clicked element
+      $(this).find('a').addClass( selectedClass );
+
+      // Add the font class to the wrapper
+      $('html').attr('id', $(this).attr('id'));
+
+      // Set the cookie for the clicked item
+      if (Cookies.enabled) {
+          Cookies.set('font_size', $(this).attr('id'));
+      }
+      ev.preventDefault();
+      });
+
+      // Get and Set the font size from the cookie 
+      if (Cookies.enabled) {
+        var fontSize = Cookies.get('font_size');
+        if( fontSize ) {
+        // set the font size on the body
+        jQuery('html').attr('id', fontSize );
+        jQuery('.js--accessibility__font__size').find('li a').removeClass('current');
+        jQuery('.js--accessibility__font__size li#' + fontSize + ' a').addClass('current');
+      }
+    }
+  </script>
+
+  <div id="top" class="header">
+    <h1>Local COVID-19 Dashboard</h1>
+    <div id="button">
+      <a href="index.html">Back Home</a>
+    </div>
+  </div>
+
+  <div id=content>
+    <h1>Settings</h1>
+    <h3>Text Size Options</h3>
+    <ul class="accessibility_font_size_list">
+      <li id="font_size_0">
+        <a href="#" class="">Sample Text</a>
+      </li>
+      <li id="font_size_1">
+        <a href="#" class="">Sample Text</a>
+      </li>
+      <li id="font_size_2">
+        <a href="#" class="">Sample Text</a>
+      </li>    
+      
+    </ul>
+    
+    <h3>High Color Contrast</h3>
+    <h3>Underline Buttons and Links</h3>
+    <h3>Image and Figure Descriptions</h3>
+  </div>
+  
+
+</body>
+
+</html>

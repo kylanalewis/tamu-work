@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Location Service</title>
+</head>
+<style> 
+    p {font-family: Arial, Helvetica, sans-serif;}
+</style> 
+
+
+<html>
+  <body>
+    <p>Click the button to get your coordinates.</p>
+    <button type="button" class="btn btn-primary" onclick="getLocation()">
+      Try It.
+    </button>
+    <p id="coordinate"></p>
+    <p id="json"></p>
+  </body>
+</html>
+
+<script src="get_location.js"></script>
+    <script src="bigdatacloud_reverse_geocode.js"></script>

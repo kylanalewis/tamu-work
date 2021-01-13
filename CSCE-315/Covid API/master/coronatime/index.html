@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local COVID-19 Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+  <!-- TAB CONTENT STYLE SHEETS -->
+  <link href="home.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="top" class="header">
+    <h1>Local COVID-19 Dashboard</h1>
+    <div id="button">
+      <a href="settings.html">Settings</a>
+    </div>
+  </div>
+ 
+  <!-- Tab link functionality -->
+  <button class="tablink" id="current">Home</button>
+  <a href="general.html"><button class="tablink">General Info.</button></a>
+  <a href="stats.html"><button class="tablink">Statistics</button></a>
+  <a href="medical.html"><button class="tablink">Medical Facilities</button></a>
+  <a href="food.html"><button class="tablink">Food</button></a>
+  <a href="news.html"><button class="tablink">News and Media</button></a>
+
+  <!-- Tab content -->
+  <div id="Home" class="tabcontent">
+    <h3>Home</h3>
+    <p>Summary dashboard</p>
+    <div id="homeScript">
+      <script src="homeScript.js"></script>
+    </div>
+  </div>
+
+</body>
+
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="search.css" rel="stylesheet">
+<script src="searchCases.js"></script>
+</head>     
+<body>
+
+<h2>Search Texas Counties: </h2>
+
+<form autocomplete="off" action="/action_page.php">
+  <div class="autocomplete" style="width:300px;">
+    <input id="myInput" type="text" name="myCountry" placeholder="County Name">
+  </div>
+  <input type="submit">
+</form>
+
+<script> 
+function autocomplete(inp, arr) {
+    /*the autocomplete function takes two arguments,
+    the text field element and an array of possible autocompleted values:*/
+    var currentFocus;
+   
+    inp.addEventListener("input", function(e) {
+        var a, b, i, val = this.value;
+        
+        closeAllLists();
+        if (!val) { return false;}
+        currentFocus = -1;
+        
+        a = document.createElement("DIV");
+        a.setAttribute("id", this.id + "autocomplete-list");
+        a.setAttribute("class", "autocomplete-items");
+        
+        this.parentNode.appendChild(a);
+        
+        for (i = 0; i < arr.length; i++) {
+          
+          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+            
+            b = document.createElement("DIV");
+            
+            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+            b.innerHTML += arr[i].substr(val.length);
+            
+            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+            
+            b.addEventListener("click", function(e) {
+                
+                inp.value = this.getElementsByTagName("input")[0].value;
+                
+                closeAllLists();
+            });
+            a.appendChild(b);
+          }
+        }
+    });
+    
+    inp.addEventListener("keydown", function(e) {
+        var x = document.getElementById(this.id + "autocomplete-list");
+        if (x) x = x.getElementsByTagName("div");
+        if (e.keyCode == 40) {
+          
+          currentFocus++;
+          
+          addActive(x);
+        } else if (e.keyCode == 38) { 
+          currentFocus--;
+          
+          addActive(x);
+        } else if (e.keyCode == 13) {
+          
+          e.preventDefault();
+          if (currentFocus > -1) {
+            
+            if (x) x[currentFocus].click();
+          }
+        }
+    });
+    function addActive(x) {
+      
+      if (!x) return false;
+      
+      removeActive(x);
+      if (currentFocus >= x.length) currentFocus = 0;
+      if (currentFocus < 0) currentFocus = (x.length - 1);
+      
+      x[currentFocus].classList.add("autocomplete-active");
+    }
+    function removeActive(x) {
+      
+      for (var i = 0; i < x.length; i++) {
+        x[i].classList.remove("autocomplete-active");
+      }
+    }
+    function closeAllLists(elmnt) {
+      
+      var x = document.getElementsByClassName("autocomplete-items");
+      for (var i = 0; i < x.length; i++) {
+        if (elmnt != x[i] && elmnt != inp) {
+          x[i].parentNode.removeChild(x[i]);
+        }
+      }
+    }
+    
+    document.addEventListener("click", function (e) {
+        closeAllLists(e.target);
+    });
+  }
+  
+  /*An array containing all the county names in Texas:*/
+  var counties = ["Anderson County",
+  "Andrews County",
+  "Angelina County",
+  "Aransas County",
+  "Archer County",
+  "Armstrong County",
+  "Atascosa County",
+  "Austin County",
+  "Bailey County",
+  "Bandera County",
+  "Bastrop County",
+  "Baylor County",
+  "Bee County",
+  "Bell County",
+  "Bexar County",
+  "Blanco County",
+  "Borden County",
+  "Bosque County",
+  "Bowie County",
+  "Brazoria County",
+  "Brazos County",
+  "Brewster County",
+  "Briscoe County",
+  "Brooks County",
+  "Brown County",
+  "Burleson County",
+  "Burnet County",
+  "Caldwell County",
+  "Calhoun County",
+  "Callahan County",
+  "Cameron County",
+  "Camp County",
+  "Carson County",
+  "Cass County",
+  "Castro County",
+  "Chambers County",
+  "Cherokee County",
+  "Childress County",
+  "Clay County",
+  "Cochran County",
+  "Coke County",
+  "Coleman County",
+  "Collin County",
+  "Collingsworth County",
+  "Colorado County",
+  "Comal County",
+  "Comanche County",
+  "Concho County",
+  "Cooke County",
+  "Coryell County",
+  "Cottle County",
+  "Crane County",
+  "Crockett County",
+  "Crosby County",
+  "Culberson County",
+  "Dallam County",
+  "Dallas County",
+  "Dawson County",
+  "Deaf Smith County",
+  "Delta County",
+  "Denton County",
+  "DeWitt County",
+  "Dickens County",
+  "Dimmit County",
+  "Donley County",
+  "Duval County",
+  "Eastland County",
+  "Ector County",
+  "Edwards County",
+  "El Paso County",
+  "Ellis County",
+  "Erath County",
+  "Falls County",
+  "Fannin County",
+  "Fayette County",
+  "Fisher County",
+  "Floyd County",
+  "Foard County",
+  "Fort Bend County",
+  "Franklin County",
+  "Freestone County",
+  "Frio County",
+  "Gaines County",
+  "Galveston County",
+  "Garza County",
+  "Gillespie County",
+  "Glasscock County",
+  "Goliad County",
+  "Gonzales County",
+  "Gray County",
+  "Grayson County",
+  "Gregg County",
+  "Grimes County",
+  "Guadalupe County",
+  "Hale County",
+  "Hall County",
+  "Hamilton County",
+  "Hansford County",
+  "Hardeman County",
+  "Hardin County",
+  "Harris County",
+  "Harrison County",
+  "Hartley County",
+  "Haskell County",
+  "Hays County",
+  "Hemphill County",
+  "Henderson County",
+  "Hidalgo County",
+  "Hill County",
+  "Hockley County",
+  "Hood County",
+  "Hopkins County",
+  "Houston County",
+  "Howard County",
+  "Hudspeth County",
+  "Hunt County",
+  "Hutchinson County",
+  "Irion County",
+  "Jack County",
+  "Jackson County",
+  "Jasper County",
+  "Jeff Davis County",
+  "Jefferson County",
+  "Jim Hogg County",
+  "Jim Wells County",
+  "Johnson County",
+  "Jones County",
+  "Karnes County",
+  "Kaufman County",
+  "Kendall County",
+  "Kenedy County",
+  "Kent County",
+  "Kerr County",
+  "Kimble County",
+  "King County",
+  "Kinney County",
+  "Kleberg County",
+  "Knox County",
+  "La Salle County",
+  "Lamar County",
+  "Lamb County",
+  "Lampasas County",
+  "Lavaca County",
+  "Lee County",
+  "Leon County",
+  "Liberty County",
+  "Limestone County",
+  "Lipscomb County",
+  "Live Oak County",
+  "Llano County",
+  "Loving County",
+  "Lubbock County",
+  "Lynn County",
+  "Madison County",
+  "Marion County",
+  "Martin County",
+  "Mason County",
+  "Matagorda County",
+  "Maverick County",
+  "McCulloch County",
+  "McLennan County",
+  "McMullen County",
+  "Medina County",
+  "Menard County",
+  "Midland County",
+  "Milam County",
+  "Mills County",
+  "Mitchell County",
+  "Montague County",
+  "Montgomery County",
+  "Moore County",
+  "Morris County",
+  "Motley County",
+  "Nacogdoches County",
+  "Navarro County",
+  "Newton County",
+  "Nolan County",
+  "Nueces County",
+  "Ochiltree County",
+  "Oldham County",
+  "Orange County",
+  "Palo Pinto County",
+  "Panola County",
+  "Parker County",
+  "Parmer County",
+  "Pecos County",
+  "Polk County",
+  "Potter County",
+  "Presidio County",
+  "Rains County",
+  "Randall County",
+  "Reagan County",
+  "Real County",
+  "Red River County",
+  "Reeves County",
+  "Refugio County",
+  "Roberts County",
+  "Robertson County",
+  "Rockwall County",
+  "Runnels County",
+  "Rusk County",
+  "Sabine County",
+  "San Augustine County",
+  "San Jacinto County",
+  "San Patricio County",
+  "San Saba County",
+  "Schleicher County",
+  "Scurry County",
+  "Shackelford County",
+  "Shelby County",
+  "Sherman County",
+  "Smith County",
+  "Somervell County",
+  "Starr County",
+  "Stephens County",
+  "Sterling County",
+  "Stonewall County",
+  "Sutton County",
+  "Swisher County",
+  "Tarrant County",
+  "Taylor County",
+  "Terrell County",
+  "Terry County",
+  "Throckmorton County",
+  "Titus County",
+  "Tom Green County",
+  "Travis County",
+  "Trinity County",
+  "Tyler County",
+  "Upshur County",
+  "Upton County",
+  "Uvalde County",
+  "Val Verde County",
+  "Van Zandt County",
+  "Victoria County",
+  "Walker County",
+  "Waller County",
+  "Ward County",
+  "Washington County",
+  "Webb County",
+  "Wharton County",
+  "Wheeler County",
+  "Wichita County",
+  "Wilbarger County",
+  "Willacy County",
+  "Williamson County",
+  "Wilson County",
+  "Winkler County",
+  "Wise County",
+  "Wood County",
+  "Yoakum County",
+  "Young County",
+  "Zapata County",
+  "Zavala County"];
+  
+  autocomplete(document.getElementById("myInput"), counties);
+  </script>
+
+</body>
+</html>

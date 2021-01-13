@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local COVID-19 Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+
+  <!-- TAB CONTENT STYLE SHEETS -->
+  <!-- <link href="stats.css" rel="stylesheet"> -->
+  <link href="National_API\searchbar\search.css" rel="stylesheet">
+  <script src="National_API\searchbar\searchCases.js"></script>
+  <link href="homeScript.css" rel="stylesheet">
+</head>
+
+<body onload="getLocation()">
+  <div id = "top" class="header">
+    <h1>Local COVID-19 Dashboard</h1>
+    <div id="button">
+      <a href="settings.html">Settings</a>
+    </div>
+  </div>
+ 
+  <!-- Tab link functionality -->
+  <a href="index.html"><button class="tablink">Home</button></a>
+  <a href="general.html"><button class="tablink">General Info.</button></a>
+  <button class="tablink" id="current">Statistics</button>
+  <a href="medical.html"><button class="tablink">Medical Facilities</button></a>
+  <a href="food.html"><button class="tablink">Food</button></a>
+  <a href="news.html"><button class="tablink">News and Media</button></a>
+
+  <div id="Statistics" class="tabcontent">
+    <h3>Statistics</h3>
+    <p>Texas county statistics.</p>
+
+    <p id="coordinate"></p>
+    <p id="json"></p>
+
+    <form id="form" autocomplete="off" onsubmit="returnGuess(); return false" action="">
+
+      <div class="autocomplete" style="width:300px;">
+        <input id="myInput" type="text" name="county" placeholder="County Name">
+      </div>
+      <input type="submit">
+
+    </form>
+
+    <div id="CountyCases">
+      <script src="National_API\searchbar\searchCases.js"></script>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
+
+<script src="National_API\getUserLocation\get_location.js"></script>
+<script src="National_API\getUserLocation\bigdatacloud_reverse_geocode.js"></script>
